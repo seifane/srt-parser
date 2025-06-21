@@ -35,9 +35,12 @@ class Time
 
     private static function parseTime($time)
     {
-        $time = explode(',', $time, 2);
-        $milliseconds = $time[1];
-        $splitTime = explode(':', $time[0], 3);
+        $parsedTime = explode(',', $time, 2);
+        if (count($parsedTime) < 2) {
+            $parsedTime = explode('.', $time, 2);
+        }
+        $milliseconds = $parsedTime[1];
+        $splitTime = explode(':', $parsedTime[0], 3);
 
         $times = [];
         $times['hours'] = (int)$splitTime[0];
